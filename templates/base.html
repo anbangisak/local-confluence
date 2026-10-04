@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Local Confluence{% endblock %}</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <span class="brand">Local Confluence</span>
+        <a class="new-page-btn" href="{{ url_for('new_page') }}">+ New Page</a>
+      </div>
+      <nav class="page-list">
+        {% for p in sidebar_pages %}
+          <a class="page-link {% if page is defined and page and page.id == p.id %}active{% endif %}"
+             href="{{ url_for('view_page', slug=p.id) }}">
+            {{ p.title }}
+          </a>
+        {% else %}
+          <p class="empty-hint">No pages yet.</p>
+        {% endfor %}
+      </nav>
+    </aside>
+    <main class="content">
+      {% block content %}{% endblock %}
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Welcome - Local Confluence{% endblock %}
+{% block content %}
+<div class="empty-state">
+  <h1>Welcome to Local Confluence</h1>
+  <p>Create your first page to get started.</p>
+  <a class="btn" href="{{ url_for('new_page') }}">+ New Page</a>
+</div>
+{% endblock %}

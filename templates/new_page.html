@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}New Page - Local Confluence{% endblock %}
+{% block content %}
+<article class="page">
+  <h1>Create a new page</h1>
+  {% if error %}<p class="error">{{ error }}</p>{% endif %}
+  <form method="post" action="{{ url_for('new_page') }}">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" value="{{ title or '' }}" required>
+
+    <label for="content">Content (Markdown supported)</label>
+    <div class="editor-split">
+      <div class="editor-pane">
+        <div class="editor-toolbar">
+          <label class="btn btn-sm btn-secondary" for="content-image">Insert Image</label>
+          <input type="file" id="content-image" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+          <span class="upload-hint">or paste an image (Ctrl+V)</span>
+          <span id="content-image-status" class="upload-status"></span>
+        </div>
+        <textarea id="content" name="content" rows="16" placeholder="Start writing...">{{ content or '' }}</textarea>
+      </div>
+      <div class="preview-pane">
+        <div class="preview-label">Preview</div>
+        <div id="content-preview" class="preview-content"></div>
+      </div>
+    </div>
+
+    <button type="submit" class="btn">Create Page</button>
+  </form>
+</article>
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script>
+  initSplitEditor("content", "content-preview");
+  initImageUpload("content", "content-image", "content-image-status");
+</script>
+{% endblock %}

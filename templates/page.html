@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ page.title }} - Local Confluence{% endblock %}
+{% block content %}
+<article class="page">
+  <header class="page-header">
+    <h1>{{ page.title }}</h1>
+    <div class="page-header-row">
+      <p class="meta">Last updated {{ page.updated_at }}</p>
+      <a class="btn" href="{{ url_for('edit_page', slug=page.id) }}">Edit</a>
+    </div>
+  </header>
+
+  {% if page.content %}
+    <div class="block-content">{{ page.content | render_markdown | safe }}</div>
+  {% else %}
+    <p class="empty-hint">This page has no content yet.</p>
+  {% endif %}
+</article>
+{% endblock %}
