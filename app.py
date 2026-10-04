@@ -136,6 +136,18 @@ def edit_page(slug):
     return render_template("edit_page.html", page=page, title=page["title"], content=page["content"])
 
 
+@app.route("/page/<slug>/favorite", methods=["POST"])
+def toggle_favorite(slug):
+    page = storage.toggle_favorite(slug)
+    if page is None:
+        abort(404)
+    next_url = request.form.get("next", "")
+    # Only allow redirecting back to a same-site path to avoid an open redirect.
+    if not next_url.startswith("/") or next_url.startswith("//"):
+        next_url = url_for("view_page", slug=slug)
+    return redirect(next_url)
+
+
 @app.errorhandler(404)
 def not_found(_exc):
     return render_template("404.html"), 404

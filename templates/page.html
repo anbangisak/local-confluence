@@ -6,6 +6,12 @@
     <h1>{{ page.title }}</h1>
     <div class="page-header-row">
       <p class="meta">Last updated {{ page.updated_at }}</p>
+      <form class="favorite-form" method="post" action="{{ url_for('toggle_favorite', slug=page.id) }}">
+        <input type="hidden" name="next" value="{{ request.path }}">
+        <button type="submit" class="btn btn-secondary favorite-toggle {% if page.is_favorite %}active{% endif %}">
+          {{ '★ Favorited' if page.is_favorite else '☆ Favorite' }}
+        </button>
+      </form>
       <a class="btn" href="{{ url_for('edit_page', slug=page.id) }}">Edit</a>
     </div>
   </header>

@@ -15,15 +15,34 @@
         <span class="brand">Local Confluence</span>
         <a class="new-page-btn" href="{{ url_for('new_page') }}">+ New Page</a>
       </div>
-      <nav class="page-list">
-        {% for p in sidebar_pages %}
+      {% macro page_row(p) %}
+        <div class="page-row">
           <a class="page-link {% if page is defined and page and page.id == p.id %}active{% endif %}"
              href="{{ url_for('view_page', slug=p.id) }}">
             {{ p.title }}
           </a>
-        {% else %}
+          <form class="favorite-form" method="post" action="{{ url_for('toggle_favorite', slug=p.id) }}">
+            <input type="hidden" name="next" value="{{ request.path }}">
+            <button type="submit" class="favorite-btn {% if p.is_favorite %}active{% endif %}"
+                    title="{{ 'Remove from favorites' if p.is_favorite else 'Add to favorites' }}"
+                    aria-label="{{ 'Remove from favorites' if p.is_favorite else 'Add to favorites' }}">{{ '★' if p.is_favorite else '☆' }}</button>
+          </form>
+        </div>
+      {% endmacro %}
+      <nav class="page-list">
+        {% set favorites = sidebar_pages | selectattr('is_favorite') | list %}
+        {% set others = sidebar_pages | rejectattr('is_favorite') | list %}
+        {% if not sidebar_pages %}
           <p class="empty-hint">No pages yet.</p>
-        {% endfor %}
+        {% endif %}
+        {% if favorites %}
+          <p class="page-list-heading">Favorites</p>
+          {% for p in favorites %}{{ page_row(p) }}{% endfor %}
+        {% endif %}
+        {% if others %}
+          {% if favorites %}<p class="page-list-heading">All Pages</p>{% endif %}
+          {% for p in others %}{{ page_row(p) }}{% endfor %}
+        {% endif %}
       </nav>
     </aside>
     <main class="content">
