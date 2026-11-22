@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sprint {{SPRINT_ID}} Report</title>
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 14px; color: #222; }
+  table { border-collapse: collapse; margin: 16px 0; }
+  th, td { border: 1px solid #999; padding: 6px 12px; text-align: left; }
+  th { background-color: #f2f2f2; }
+  h3 { margin-top: 28px; }
+  .metrics img { max-width: 480px; display: block; margin: 12px 0; border: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<p>Hi All,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;PFB the Sprint {{SPRINT_ID}} Report for the duration &ndash; {{DATE_RANGE}}</p>
+
+<table>
+<tr><th>Items</th><th>Product &ndash; Data ({{OWNER}})</th></tr>
+<tr><td>Planned forecasted SP's / days</td><td>{{PLANNED_SP}}</td></tr>
+<tr><td>Planned forecasted capacity in hrs</td><td>{{PLANNED_HRS}}</td></tr>
+<tr><td>Actual SP's / days</td><td>{{ACTUAL_SP}}</td></tr>
+<tr><td>Actual capacity in hrs</td><td>{{ACTUAL_HRS}}</td></tr>
+</table>
+
+<h3>Key Deliverables :</h3>
+<table>
+<tr><th>Component</th><th>Deliverables</th></tr>
+{{DELIVERABLES_ROWS}}
+</table>
+
+<h3>Sprint Metrics :</h3>
+<div class="metrics">
+{{METRICS_IMAGES}}
+</div>
+
+</body>
+</html>

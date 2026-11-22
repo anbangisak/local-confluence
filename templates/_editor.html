@@ -1,0 +1,49 @@
+<div class="cms-editor" id="cms-editor">
+  <div class="cms-tabs">
+    <button type="button" class="cms-tab active" data-mode="visual">Visual</button>
+    <button type="button" class="cms-tab" data-mode="markdown">Markdown</button>
+    <span class="cms-tabs-spacer"></span>
+    <button type="button" class="btn btn-sm btn-secondary" id="cms-fullscreen" title="Toggle full screen (Esc to exit)">⛶ Full screen</button>
+  </div>
+
+  <div class="cms-pane" id="cms-visual-pane">
+    <div class="cms-toolbar" id="cms-toolbar"></div>
+    <div class="cms-toolbar cms-table-tools" id="cms-table-tools" hidden></div>
+    <div id="cms-surface" class="cms-surface block-content" contenteditable="true" spellcheck="true"></div>
+    <input type="file" id="cms-image-input" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+  </div>
+
+  <div class="cms-pane" id="cms-markdown-pane" hidden>
+    <div class="editor-split">
+      <div class="editor-pane">
+        <div class="editor-toolbar" id="content-toolbar">
+          <label class="btn btn-sm btn-secondary" for="content-image">Insert Image</label>
+          <input type="file" id="content-image" accept="image/png,image/jpeg,image/gif,image/webp" hidden>
+          <span class="upload-hint">or paste an image (Ctrl+V)</span>
+          <span id="content-image-status" class="upload-status"></span>
+        </div>
+        <textarea id="content" name="content" rows="16" placeholder="Start writing...">{{ content or '' }}</textarea>
+      </div>
+      <div class="preview-pane">
+        <div class="preview-label">Preview</div>
+        <div id="content-preview" class="preview-content"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cms-status">
+    <span id="cms-count">0 words</span>
+    <span id="cms-message" class="upload-status"></span>
+    <span class="upload-hint">Ctrl+S to save</span>
+  </div>
+</div>
+<script src="{{ url_for('static', filename='vendor/turndown.js') }}"></script>
+<script src="{{ url_for('static', filename='vendor/turndown-plugin-gfm.js') }}"></script>
+<script src="{{ url_for('static', filename='js/editor.js') }}"></script>
+<script src="{{ url_for('static', filename='js/cms-editor.js') }}"></script>
+<script>
+  initSplitEditor("content", "content-preview");
+  initImageUpload("content", "content-image", "content-image-status");
+  initTableBuilder("content", "content-toolbar");
+  initCmsEditor({ textareaId: "content", editorId: "cms-editor" });
+</script>

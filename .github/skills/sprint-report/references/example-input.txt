@@ -1,0 +1,23 @@
+Sprint#17:(3 Nov 2026 - 16 Nov 2026)
+Overall Planned StoryPoints: 36
+Overall Actual StoryPoints: 33
+Delivered Story Points: 33
+Selvi(1 - special, 1 - casual, 1 - adhoc)
+3657 - 3SP - Mangrove - (continued)Implement DLQ-to-S3 Failure Archive & Re-drive Pipeline - dev completed
+3922 - 1SP - VDI licence - [Analysis] Explore Leostream Connection Broker REST API for VDI License Expiry & Utilization Metadata - done
+3920 - 1SP - Mangrove - Remediate security vulnerability: CVE-2026-111943 - dev completed
+Arun(1 special leave, 1 - adhoc):
+3930 - 1SP - SkyDE - Investigate and resolve query performance degradation (~2 min latency) on Iceberg table in Preprod - Inprogress
+3931 - 1SP - Hermit - E2E Testing: Validate Bedrock-driven automated configuration pipeline (MSK Consumer, Iceberg DB, and Amazon DataZone Onboarding) - dev completed
+3932 - 3SP - SLEM - Implement Chile 2.0 MSK Event Source Mappings for Lambda to Ingest slem-topic & slem-ack-topic into Apache Iceberg - dev completed
+3933 - 3SP - SLEM - Implement Chile 2.0 MSK Event Source Mappings for Lambda to Ingest SLE high priority topic & FMTS acknowledgement topic into Apache Iceberg - dev completed
+Krishna:(annual leave - 1, sick leave - 1)
+3926 - 3SP - VDI licence - HP Anyware - Migrate credentials from xVault to AWS Secrets Manager via Concourse and integrate with Lambda - dev completed
+3927 - 3SP - VDI licence - Implement scheduled AWS Lambda to fetch HP Anyware VDI license expiry metadata via EventBridge (Daily at 2:00 AM) - dev completed
+3928 - 3SP - VDI licence - Define HP Anyware license metadata schema, provision Apache Iceberg table, and persist license data via Lambda - inReview
+3929 - 2SP - VDI licence - Pipeline migration to latest changes in concourse - dev completed
+Guna:
+3918 - 2SP - Mangrove - Rotate credentials for sdh service user across Preprod and Prod environments - done
+3919 - 2SP - Mangrove - Remediate security vulnerabilities reported across packages/images (Tenable Findings Batch) - done
+3934 - 3SP - SLEM - Implement Chile 2.0 MSK Event Source Mappings for Lambda to Ingest Airtable topic & Airtable acknowledgement topic into Apache Iceberg - dev completed
+3935 - 2SP - SLEM - Implement Chile 2.0 MSK Event Source Mappings for Lambda to Ingest SLE acknowledgement topic & SLE topic into Apache Iceberg - dev completed

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Sprint 17 Report</title>
+<style>
+  body { font-family: Calibri, Arial, sans-serif; font-size: 14px; color: #222; }
+  table { border-collapse: collapse; margin: 16px 0; }
+  th, td { border: 1px solid #999; padding: 6px 12px; text-align: left; }
+  th { background-color: #f2f2f2; }
+  h3 { margin-top: 28px; }
+  .metrics img { max-width: 480px; display: block; margin: 12px 0; border: 1px solid #ddd; }
+</style>
+</head>
+<body>
+<p>Hi All,</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;PFB the Sprint 17 Report for the duration &ndash; 3 Nov 2026 - 16 Nov 2026</p>
+
+<table>
+<tr><th>Items</th><th>Product &ndash; Data (Guna)</th></tr>
+<tr><td>Planned forecasted SP's / days</td><td>36</td></tr>
+<tr><td>Planned forecasted capacity in hrs</td><td>216</td></tr>
+<tr><td>Actual SP's / days</td><td>33</td></tr>
+<tr><td>Actual capacity in hrs</td><td>198</td></tr>
+</table>
+
+<h3>Key Deliverables :</h3>
+<table>
+<tr><th>Component</th><th>Deliverables</th></tr>
+<tr><td>Mangrove</td><td><ul><li>(continued) Implemented DLQ-to-S3 Failure Archive &amp; Re-drive Pipeline</li><li>Remediated security vulnerability: CVE-2026-111943</li><li>Rotated credentials for sdh service user across Preprod and Prod environments</li><li>Remediated security vulnerabilities reported across packages/images (Tenable Findings Batch)</li></ul></td></tr>
+<tr><td>VDI licence</td><td><ul><li>[Analysis] Explored Leostream Connection Broker REST API for VDI License Expiry &amp; Utilization Metadata</li><li>HP Anyware - Migrate credentials from xVault to AWS Secrets Manager via Concourse and integrate with Lambda</li><li>Implemented scheduled AWS Lambda to fetch HP Anyware VDI license expiry metadata via EventBridge (Daily at 2:00 AM)</li><li>Defined HP Anyware license metadata schema, provision Apache Iceberg table, and persist license data via Lambda (in review)</li><li>Pipeline migration to latest changes in concourse</li></ul></td></tr>
+<tr><td>SkyDE</td><td><ul><li>Investigate and resolve query performance degradation (~2 min latency) on Iceberg table in Preprod (in progress)</li></ul></td></tr>
+<tr><td>Hermit</td><td><ul><li>E2E Testing: Validated Bedrock-driven automated configuration pipeline (MSK Consumer, Iceberg DB, and Amazon DataZone Onboarding)</li></ul></td></tr>
+<tr><td>SLEM</td><td><ul><li>Implemented Chile 2.0 MSK Event Source Mappings for Lambda to Ingest slem-topic &amp; slem-ack-topic into Apache Iceberg</li><li>Implemented Chile 2.0 MSK Event Source Mappings for Lambda to Ingest SLE high priority topic &amp; FMTS acknowledgement topic into Apache Iceberg</li><li>Implemented Chile 2.0 MSK Event Source Mappings for Lambda to Ingest Airtable topic &amp; Airtable acknowledgement topic into Apache Iceberg</li><li>Implemented Chile 2.0 MSK Event Source Mappings for Lambda to Ingest SLE acknowledgement topic &amp; SLE topic into Apache Iceberg</li></ul></td></tr>
+</table>
+
+<h3>Sprint Metrics :</h3>
+<div class="metrics">
+<p><em>No sprint metrics images provided for this sprint.</em></p>
+</div>
+
+</body>
+</html>

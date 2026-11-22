@@ -95,3 +95,69 @@ function initImageUpload(textareaId, fileInputId, statusId) {
   });
 }
 
+
+// Adds an "Insert Table" button (rows/columns picker) to a toolbar; inserts a Markdown table at the caret.
+function initTableBuilder(textareaId, toolbarId) {
+  const textarea = document.getElementById(textareaId);
+  const toolbar = document.getElementById(toolbarId);
+  if (!textarea || !toolbar) return;
+
+  const MAX_ROWS = 50;
+  const MAX_COLS = 12;
+
+  const wrapper = document.createElement("span");
+  wrapper.className = "table-builder";
+  wrapper.innerHTML = `
+    <button type="button" class="btn btn-sm btn-secondary table-builder-toggle">Insert Table</button>
+    <span class="table-builder-panel" hidden>
+      <label>Rows <input type="number" class="tb-rows" min="1" max="${MAX_ROWS}" value="3"></label>
+      <label>Cols <input type="number" class="tb-cols" min="1" max="${MAX_COLS}" value="3"></label>
+      <button type="button" class="btn btn-sm tb-insert">Insert</button>
+      <button type="button" class="btn btn-sm btn-secondary tb-cancel">Cancel</button>
+    </span>`;
+  toolbar.insertBefore(wrapper, toolbar.firstChild);
+
+  const toggle = wrapper.querySelector(".table-builder-toggle");
+  const panel = wrapper.querySelector(".table-builder-panel");
+  const rowsInput = wrapper.querySelector(".tb-rows");
+  const colsInput = wrapper.querySelector(".tb-cols");
+
+  function clamp(value, max) {
+    const n = parseInt(value, 10);
+    return Math.min(Math.max(Number.isNaN(n) ? 1 : n, 1), max);
+  }
+
+  function buildTable(rows, cols) {
+    const row = (cell) => "| " + Array.from({ length: cols }, (_, i) => cell(i)).join(" | ") + " |";
+    const lines = [row((i) => `Header ${i + 1}`), row(() => "---")];
+    for (let r = 0; r < rows; r++) lines.push(row(() => "   "));
+    return lines.join("\n");
+  }
+
+  function insertTable() {
+    const table = buildTable(clamp(rowsInput.value, MAX_ROWS), clamp(colsInput.value, MAX_COLS));
+    const pos = textarea.selectionStart ?? textarea.value.length;
+    const before = textarea.value.slice(0, pos);
+    // Markdown tables must be preceded by a blank line.
+    const prefix = before === "" || before.endsWith("\n\n") ? "" : before.endsWith("\n") ? "\n" : "\n\n";
+    insertAtCursor(textarea, `${prefix}${table}\n\n`);
+    panel.hidden = true;
+  }
+
+  toggle.addEventListener("click", () => {
+    panel.hidden = !panel.hidden;
+    if (!panel.hidden) rowsInput.focus();
+  });
+  wrapper.querySelector(".tb-cancel").addEventListener("click", () => {
+    panel.hidden = true;
+  });
+  wrapper.querySelector(".tb-insert").addEventListener("click", insertTable);
+  [rowsInput, colsInput].forEach((input) =>
+    input.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        insertTable();
+      }
+    })
+  );
+}
